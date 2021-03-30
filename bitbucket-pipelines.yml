@@ -1,0 +1,56 @@
+pipelines:
+  branches:
+    '{feature/*,hotfix/*,bugfix/*}':
+      - step:
+          name: Build Vue
+          image: vuejs/ci
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run build-dev
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to dev
+          image: mesosphere/aws-cli
+          deployment: test
+          trigger: manual
+          script:
+            - aws s3 sync --delete --exclude "media/*" dist  s3://<dev bucket name>
+    'release/*':
+      - step:
+          name: Build Vue
+          image: vuejs/ci
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run build-qa
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to QA
+          image: mesosphere/aws-cli
+          deployment: staging
+          trigger: manual
+          script:
+            - aws s3 sync --delete --exclude "media/*" dist  s3://<qa bucket name>
+    master:
+      - step:
+          name: Build Vue
+          image: vuejs/ci
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run build
+          artifacts:
+            - dist/**
+      - step:
+          name: Deploy to production
+          image: mesosphere/aws-cli
+          deployment: production
+          trigger: manual
+          script:
+            - aws s3 sync --delete --exclude "media/*" dist  s3://<prod bucket name>

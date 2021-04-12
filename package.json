@@ -17,12 +17,14 @@
     "pre-commit": "cross-env PRE_COMMIT=true lint-staged"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.6.4",
-    "express": "^4.17.1",
+    "date-fns": "^2.19.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vue-server-renderer": "^2.6.12",
     "vuex": "^3.4.0",
+    "weather-icons": "git+https://github.com/erikflowers/weather-icons.git",
     "webpack-merge": "^5.4.0"
   },
   "devDependencies": {

@@ -5,6 +5,8 @@ import store from './store';
 
 Vue.config.productionTip = false;
 
+Vue.filter('TitleCase', (value) => value.toLowerCase().replace(/(?:^|\s|-)\S/g, (x) => x.toUpperCase()));
+
 new Vue({
   router,
   store,

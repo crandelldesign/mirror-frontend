@@ -1,4 +1,4 @@
-# 24G Vue Template
+# Mirror Project - Frontend
 
 ## Project setup
 
@@ -7,6 +7,7 @@ npm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 npm run serve
 ```

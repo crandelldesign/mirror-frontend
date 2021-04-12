@@ -65,4 +65,15 @@ module.exports = {
         },
       });
   },
+  devServer: {
+    proxy: {
+      '/home-nest-api': {
+        target: 'http://homenestapi.test',
+        secure: false,
+        pathRewrite: {
+          '^/home-nest-api': '',
+        },
+      },
+    },
+  },
 };
